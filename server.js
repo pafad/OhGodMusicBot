@@ -20,6 +20,7 @@ const commands = {
 				queue[msg.guild.id].playing = false;
 				msg.member.voiceChannel.leave();
 			});
+			client.user.setActivity(song.title,{type:"LISTENING"})
 			msg.channel.sendMessage(`Playing: **${song.title}** as requested by: **${song.requester}**`);
 			dispatcher = msg.guild.voiceConnection.playStream(yt(song.url, { audioonly: true }), { passes : tokens.passes });
 			let collector = msg.channel.createCollector(m => m);
@@ -93,5 +94,6 @@ client.on('ready', () => {
 client.on('message', msg => {
 	if (!msg.content.startsWith(tokens.prefix)) return;
 	if (commands.hasOwnProperty(msg.content.toLowerCase().slice(tokens.prefix.length).split(' ')[0])) commands[msg.content.toLowerCase().slice(tokens.prefix.length).split(' ')[0]](msg);
+	client.user.setActivity("rien pour le moment",{type:"LISTENING"})
 });
 client.login(process.env.token);
