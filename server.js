@@ -82,7 +82,7 @@ const commands = {
 		msg.channel.sendMessage(tosend.join('\n'));
 	},
 	'reboot': (msg) => {
-		if (msg.author.id == tokens.adminID) process.exit(); //Requires a node module like Forever to work.
+		if (msg.author.id == process.env.adminID) process.exit(); //Requires a node module like Forever to work.
 	}
 };
 
@@ -94,4 +94,4 @@ client.on('message', msg => {
 	if (!msg.content.startsWith(tokens.prefix)) return;
 	if (commands.hasOwnProperty(msg.content.toLowerCase().slice(tokens.prefix.length).split(' ')[0])) commands[msg.content.toLowerCase().slice(tokens.prefix.length).split(' ')[0]](msg);
 });
-client.login(tokens.d_token);
+client.login(process.env.token);
