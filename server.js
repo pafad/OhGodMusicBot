@@ -91,11 +91,11 @@ const commands = {
 
 client.on('ready', () => {
 	console.log('ready!');
+	client.user.setActivity("rien pour le moment", {type: "LISTENING"})
 });
 
 client.on('message', msg => {
 	if (!msg.content.startsWith(tokens.prefix)) return;
 	if (commands.hasOwnProperty(msg.content.toLowerCase().slice(tokens.prefix.length).split(' ')[0])) commands[msg.content.toLowerCase().slice(tokens.prefix.length).split(' ')[0]](msg);
-	client.user.setActivity("rien pour le moment", {type: "LISTENING"})
 });
 client.login(process.env.token);
