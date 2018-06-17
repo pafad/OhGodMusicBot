@@ -20,6 +20,7 @@ const commands = {
 			if (song === undefined) return msg.channel.sendMessage('Queue is empty').then(() => {
 				queue[msg.guild.id].playing = false;
 				msg.member.voiceChannel.leave();
+				client.user.setPresence({game:{ name: "-help by @⚡Electrika⚡#8754",url:"https://www.twitch.tv/discordapp",type}})
 			});
 			msg.channel.sendMessage(`Playing: **${song.title}** as requested by: **${song.requester}**`);
 			dispatcher = msg.guild.voiceConnection.playStream(yt(song.url, { audioonly: true }), { passes : tokens.passes });
