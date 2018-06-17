@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const yt = require('ytdl-core');
 const tokens = require('./tokens.json');
 const client = new Discord.Client();
-const audio = require("./commandes/audio")
 let type = 1;
 
 let queue = {};
