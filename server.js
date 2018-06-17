@@ -3,10 +3,11 @@ const yt = require('ytdl-core');
 const tokens = require('./tokens.json');
 const client = new Discord.Client();
 const audio = require("./commandes/audio")
+let type = 1;
 
 client.on('ready', () => {
 	console.log('ready!');
-	client.user.setActivity("rien pour le moment", {type: "LISTENING"})
+	client.user.setPresence({game:{ name: "rien pour le moment",url:"https://www.twitch.tv/discordapp",type}})
 });
 
 client.on('message', msg => {
