@@ -1,7 +1,7 @@
-const { Client } = require('discord.js');
+const Discord = require('discord.js');
 const yt = require('ytdl-core');
 const tokens = require('./tokens.json');
-const client = new Client();
+const client = new Discord.Client();
 
 let queue = {};
 
@@ -22,6 +22,7 @@ const commands = {
 			});
 			msg.channel.sendMessage(`Playing: **${song.title}** as requested by: **${song.requester}**`);
 			dispatcher = msg.guild.voiceConnection.playStream(yt(song.url, { audioonly: true }), { passes : tokens.passes });
+			client.user.setActivity(song.title, {type: "LISTENING"})
 			let collector = msg.channel.createCollector(m => m);
 			collector.on('message', m => {
 				if (m.content.startsWith(tokens.prefix + 'pause')) {
@@ -45,11 +46,13 @@ const commands = {
 			dispatcher.on('end', () => {
 				collector.stop();
 				play(queue[msg.guild.id].songs.shift());
+				client.user.setActivity("rien pour le moment", {type: "LISTENING"})
 			});
 			dispatcher.on('error', (err) => {
 				return msg.channel.sendMessage('error: ' + err).then(() => {
 					collector.stop();
 					play(queue[msg.guild.id].songs.shift());
+					client.user.setActivity("rien pour le moment", {type: "LISTENING"})
 				});
 			});
 		})(queue[msg.guild.id].songs.shift());
@@ -93,6 +96,6 @@ client.on('ready', () => {
 client.on('message', msg => {
 	if (!msg.content.startsWith(tokens.prefix)) return;
 	if (commands.hasOwnProperty(msg.content.toLowerCase().slice(tokens.prefix.length).split(' ')[0])) commands[msg.content.toLowerCase().slice(tokens.prefix.length).split(' ')[0]](msg);
-	client.user.setGame("rien pour le moment")
+	client.user.setActivity("rien pour le moment", {type: "LISTENING"})
 });
 client.login(process.env.token);
