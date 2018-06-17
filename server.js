@@ -7,7 +7,7 @@ let type = 1;
 
 client.on('ready', () => {
 	console.log('ready!');
-	client.user.setPresence({game:{ name: "rien pour le moment",url:"https://www.twitch.tv/discordapp",type}})
+	client.user.setPresence({game:{ name: "-help by @⚡Electrika⚡#8754",url:"https://www.twitch.tv/discordapp",type}})
 });
 
 client.on('message', msg => {
