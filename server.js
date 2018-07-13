@@ -20,7 +20,7 @@ const commands = {
 			if (song === undefined) return msg.channel.sendMessage('Queue is empty').then(() => {
 				queue[msg.guild.id].playing = false;
 				msg.member.voiceChannel.leave();
-				client.user.setPresence({game:{ name: "-help by @⚡Electrika⚡#8754",url:"https://www.twitch.tv/discordapp",type}})
+				client.user.setPresence({game:{ name: "3help by @⚡Electrika⚡#8754 sur "+client.guilds.size+"",url:"https://www.twitch.tv/discordapp",type}})
 			});
 			msg.channel.sendMessage(`Playing: **${song.title}** as requested by: **${song.requester}**`);
 			dispatcher = msg.guild.voiceConnection.playStream(yt(song.url, { audioonly: true }), { passes : tokens.passes });
@@ -48,13 +48,13 @@ const commands = {
 			dispatcher.on('end', () => {
 				collector.stop();
 				play(queue[msg.guild.id].songs.shift());
-				client.user.setActivity("rien pour le moment", {type: "LISTENING"})
+				client.user.setPresence({game:{ name: "3help by @⚡Electrika⚡#8754 sur "+client.guilds.size+"",url:"https://www.twitch.tv/discordapp",type}})
 			});
 			dispatcher.on('error', (err) => {
 				return msg.channel.sendMessage('error: ' + err).then(() => {
 					collector.stop();
 					play(queue[msg.guild.id].songs.shift());
-					client.user.setActivity("rien pour le moment", {type: "LISTENING"})
+					client.user.setPresence({game:{ name: "3help by @⚡Electrika⚡#8754 sur "+client.guilds.size+"",url:"https://www.twitch.tv/discordapp",type}})
 				});
 			});
 		})(queue[msg.guild.id].songs.shift());
@@ -93,7 +93,7 @@ const commands = {
 
 client.on('ready', () => {
 	console.log('ready!');
-	client.user.setPresence({game:{ name: "-help by @⚡Electrika⚡#8754",url:"https://www.twitch.tv/discordapp",type}})
+	client.user.setPresence({game:{ name: "3help by @⚡Electrika⚡#8754 sur "+client.guilds.size+"",url:"https://www.twitch.tv/discordapp",type}})
 });
 
 client.on('message', msg => {
